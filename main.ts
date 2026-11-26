@@ -7,6 +7,9 @@ if (words.length === 0 || words.length > 280) {
 }
 
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+if (outputDir.trim().length === 0) {
+  throw new Error('MAKEFUN_OUTPUT_DIR must be a non-empty directory path');
+}
 mkdirSync(outputDir, { recursive: true });
 writeFileSync(join(outputDir, 'entry.txt'), `${words}\n`, 'utf8');
 console.log(words);
